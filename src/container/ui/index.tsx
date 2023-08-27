@@ -6,7 +6,6 @@ import {
   Paper,
   Grid,
   Card,
-  CardHeader,
   CardContent,
   CardActions,
   Typography,
@@ -21,13 +20,13 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) =>
   getStyles.make_style(theme)
 );
 const styleClasses = getStyles.use_styles;
-function CustomizedButtons({ classes }: any): ReactElement {
+function UiContainer({ classes }: any): ReactElement {
   const { state, actionsCollection } = useContext(StateContext);
   return (
     <Grid container spacing={5} direction="column">
       <Grid item className={classes.header}>
         <Paper elevation={0} className={classes.paper}>
-          <Typography variant="h3" color="primary">
+          <Typography variant="h4" color="primary">
             TypeScript / React / ReactHooks / Material-UI / ThreeJS
           </Typography>
         </Paper>
@@ -36,14 +35,11 @@ function CustomizedButtons({ classes }: any): ReactElement {
         <Paper elevation={0} className={classes.paper}>
           <Card sx={{ maxWidth: 320 }}>
             <CardContent>
-              <Typography variant="h5" color="primary">
-                {"Material-ui > ThreeJS"}
-              </Typography>
-              <Typography>
+              <Typography variant="body2">
                 This Material UI component is interacting with the ThreeJS
                 Canvas.
               </Typography>
-              <Typography>
+              <Typography variant="body2" style={{ marginTop : 10, fontSize: 10}}>
                 Every time you click this button a new complex object will be
                 added to the scene.
               </Typography>
@@ -57,13 +53,10 @@ function CustomizedButtons({ classes }: any): ReactElement {
               >
                 Click me
               </ColorButton>
-              <Typography>
-                {state.test} objects was added to the ThreeJS scene
-              </Typography>
             </CardContent>
             <Divider orientation="horizontal" variant="fullWidth" />
-            <Typography style={{ padding: 10 }} variant="h6" color="secondary">
-              More settings...
+            <Typography variant="overline" style={{ marginLeft: 10 }}>
+              {state.test} objects in the scene
             </Typography>
             <Divider orientation="horizontal" variant="fullWidth" />
             <CardActions
@@ -71,7 +64,8 @@ function CustomizedButtons({ classes }: any): ReactElement {
                 pointerEvents: "auto",
                 flexDirection: "column",
                 float: "left",
-              }}>
+              }}
+            >
               <FormControlLabel
                 control={
                   <Switch
@@ -87,10 +81,9 @@ function CustomizedButtons({ classes }: any): ReactElement {
                 label="Numbers visible"
                 slotProps={{
                   typography: {
-                    style: { fontWeight: 800 },
+                    style: { fontSize: 12 },
                   },
                 }}
-                style={{ fontWeight: 800 }}
               />
             </CardActions>
             <CardActions
@@ -116,7 +109,7 @@ function CustomizedButtons({ classes }: any): ReactElement {
                 label="Objects color"
                 slotProps={{
                   typography: {
-                    style: { width: "100%", fontWeight: 800 },
+                    style: { fontSize: 12, width: '100%' },
                   },
                 }}
               />
@@ -131,4 +124,4 @@ function CustomizedButtons({ classes }: any): ReactElement {
   );
 }
 
-export default withStyles(styleClasses)(CustomizedButtons);
+export default withStyles(styleClasses)(UiContainer);
