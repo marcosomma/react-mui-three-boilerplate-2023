@@ -1,6 +1,8 @@
 const useStyles = {
   paper: {
     background: "transparent",
+    display: "flex",
+    justifyContent: "flex-end"
   },
   container: {
     display: "flex"
