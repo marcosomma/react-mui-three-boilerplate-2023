@@ -87,7 +87,16 @@ function Landing({ classes }: any): ReactElement {
             Play
           </Button>
         </Paper>
-        <Paper>{state.recordedText}</Paper>
+        <Paper
+          style={{
+            margin: 10,
+            background: "lightblue",
+            padding: 10,
+          }}
+          elevation={0}
+        >
+          {state.recordedText}
+        </Paper>
       </Grid>
       <Grid item zeroMinWidth className={classes.footer}>
         <Paper elevation={0} className={classes.paper}>
