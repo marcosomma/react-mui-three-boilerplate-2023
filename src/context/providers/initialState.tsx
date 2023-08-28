@@ -1,17 +1,27 @@
-export type DispatchArgs = {
-    type: string;
-    payload: any;
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+    SpeechSynthesisUtterance: any;
   }
-  
-export type State = {
-    test: number;
-    test_color: string,
-    show: boolean;
 }
 
+export type DispatchArgs = {
+  type: string;
+  payload: any;
+};
+
+export type State = {
+  test: number;
+  title: string;
+  footer: string;
+  show: boolean;
+};
+
 const initialState: State = {
-    test: 0,
-    test_color: "#" + Math.floor(Math.random() * 16777215).toString(16),
-    show: false
+  test: 0,
+  title: "mAI-company prototype",
+  footer: "by @marcosomma",
+  show: false,
 };
 export default initialState;

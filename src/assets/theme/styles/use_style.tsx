@@ -3,7 +3,7 @@ const useStyles = {
     background: "transparent",
   },
   container: {
-    display: "flex"
+    display: "flex",
   },
   header: {
     top: "0",
@@ -11,7 +11,8 @@ const useStyles = {
     fontSize: "32px",
     color: "#fff",
     flexGrow: "1",
-    height: "5vh",
+    height: "10vh",
+    zIndex: 999,
   },
   body: {
     margin: "10px",
@@ -19,13 +20,15 @@ const useStyles = {
     color: "#fff",
     flexGrow: "10",
     height: "80vh",
+    zIndex: 999,
   },
   footer: {
     margin: "10px",
-    fontSize: "22px",
+    fontSize: "12px",
     color: "#fff",
     bottom: "0",
     flexGrow: "1",
+    height: "10vh",
   },
 };
 
