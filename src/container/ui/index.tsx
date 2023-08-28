@@ -1,134 +1,96 @@
-import { useContext, ReactElement } from "react";
+import { useContext, useState, useEffect, ReactElement } from "react";
 import withStyles from "@mui/styles/withStyles";
-import { styled } from "@mui/material/styles";
-import Button, { ButtonProps } from "@mui/material/Button";
 import {
   Paper,
   Grid,
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
   Typography,
-  FormControlLabel,
-  Switch,
-  Divider,
+  Select,
+  MenuItem,
+  FormControl,
+  SelectChangeEvent,
 } from "@mui/material";
-import { SketchPicker } from "react-color";
 import { StateContext } from "../../context/providers/State";
 import { getStyles } from "../../assets/theme/utils";
-const ColorButton = styled(Button)<ButtonProps>(({ theme }) =>
-  getStyles.make_style(theme)
-);
 const styleClasses = getStyles.use_styles;
-function CustomizedButtons({ classes }: any): ReactElement {
+
+function Landing({ classes }: any): ReactElement {
   const { state, actionsCollection } = useContext(StateContext);
+  const [speechRecognition, setSpeechRecognition] = useState(
+    window.SpeechRecognition
+      ? new window.SpeechRecognition()
+      : new window.webkitSpeechRecognition()
+  );
+  const [speechSynthesis, setSpeechSynthesis] = useState(
+    (window as any).speechSynthesis
+  );
+  const [utter, setUtter] = useState(new window.SpeechSynthesisUtterance());
+  const [voiceList, setVoiceList] = useState(
+    window.speechSynthesis.getVoices()
+  );
+  const [voice, setVoice] = useState("0");
+
+  useEffect(() => {
+    console.log("enter");
+    if (voiceList.length === 0) {
+      setVoiceList(window.speechSynthesis.getVoices());
+    }
+  }, [voiceList]);
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setVoice(event.target.value as string);
+  };
+  console.log("speechRecognition", speechRecognition);
+  console.log("speechSynthesis", speechSynthesis);
+  console.log("utter", utter);
+  console.log("liqqqqqqst", voiceList);
   return (
-    <Grid container spacing={5} direction="column">
+    <Grid container spacing={1} direction="column">
       <Grid item className={classes.header}>
         <Paper elevation={0} className={classes.paper}>
           <Typography variant="h3" color="primary">
-            TypeScript / React / ReactHooks / Material-UI / ThreeJS
+            {state.title}
           </Typography>
         </Paper>
       </Grid>
       <Grid item zeroMinWidth className={classes.body}>
         <Paper elevation={0} className={classes.paper}>
-          <Card sx={{ maxWidth: 320 }}>
-            <CardContent>
-              <Typography variant="h5" color="primary">
-                {"Material-ui > ThreeJS"}
-              </Typography>
-              <Typography>
-                This Material UI component is interacting with the ThreeJS
-                Canvas.
-              </Typography>
-              <Typography>
-                Every time you click this button a new complex object will be
-                added to the scene.
-              </Typography>
-              <ColorButton
-                onClick={() => {
-                  if (actionsCollection.example)
-                    actionsCollection.example.test({ sd: "aa" });
-                }}
-                style={{ pointerEvents: "auto", margin: "10px auto" }}
-                variant="contained"
-              >
-                Click me
-              </ColorButton>
-              <Typography>
-                {state.test} objects was added to the ThreeJS scene
-              </Typography>
-            </CardContent>
-            <Divider orientation="horizontal" variant="fullWidth" />
-            <Typography style={{ padding: 10 }} variant="h6" color="secondary">
-              More settings...
-            </Typography>
-            <Divider orientation="horizontal" variant="fullWidth" />
-            <CardActions
-              style={{
-                pointerEvents: "auto",
-                flexDirection: "column",
-                float: "left",
-              }}>
-              <FormControlLabel
-                control={
-                  <Switch
-                    inputProps={{ "aria-label": "TEST" }}
-                    value={state.show}
-                    onChange={() => {
-                      if (actionsCollection.example)
-                        actionsCollection.example.showToggler();
-                    }}
-                  />
-                }
-                labelPlacement="top"
-                label="Numbers visible"
-                slotProps={{
-                  typography: {
-                    style: { fontWeight: 800 },
-                  },
-                }}
-                style={{ fontWeight: 800 }}
-              />
-            </CardActions>
-            <CardActions
-              style={{
-                pointerEvents: "auto",
-                flexDirection: "column",
-                float: "left",
-              }}
+          <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+            <Select
+              labelId="voice-selector-label"
+              id="voice-selector"
+              value={voice}
+              label="Voice"
+              onChange={handleChange}
             >
-              <FormControlLabel
-                control={
-                  <div style={{ paddingTop: 10, display: "block" }}>
-                    <SketchPicker
-                      color={state.test_color}
-                      onChangeComplete={({ hex }: { hex: string }) => {
-                        if (actionsCollection.example)
-                          actionsCollection.example.setColor(hex);
-                      }}
-                    />
-                  </div>
-                }
-                labelPlacement="top"
-                label="Objects color"
-                slotProps={{
-                  typography: {
-                    style: { width: "100%", fontWeight: 800 },
-                  },
-                }}
-              />
-            </CardActions>
-          </Card>
+              {voiceList
+                .sort((a, b) => {
+                  if (a.lang < b.lang) {
+                    return -1;
+                  }
+                  if (a.lang > b.lang) {
+                    return 1;
+                  }
+                  return 0;
+                })
+                .map((vOpt, i) => {
+                  console.log(i, vOpt);
+                  return (
+                    <MenuItem key={i} value={`${i}`}>
+                      {vOpt.lang} - {vOpt.name}
+                    </MenuItem>
+                  );
+                })}
+            </Select>
+          </FormControl>
         </Paper>
       </Grid>
       <Grid item zeroMinWidth className={classes.footer}>
-        <Paper elevation={0} className={classes.paper}></Paper>
+        <Paper elevation={0} className={classes.paper}>
+          {state.footer}
+        </Paper>
       </Grid>
     </Grid>
   );
 }
 
-export default withStyles(styleClasses)(CustomizedButtons);
+export default withStyles(styleClasses)(Landing);
