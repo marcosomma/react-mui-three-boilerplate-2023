@@ -1,4 +1,4 @@
 // ALL ACTIONS
 export const ACTION_TEST = "ACTION_TEST";
 export const SHOW_TOGGLE = "SHOW_TOGGLE";
-export const POPULATE_VOICELIST = "POPULATE_VOICELIST";
+export const SET_VOICE = "SET_VOICE";

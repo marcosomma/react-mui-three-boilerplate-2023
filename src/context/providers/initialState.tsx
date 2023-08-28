@@ -16,6 +16,7 @@ export type State = {
   title: string;
   footer: string;
   show: boolean;
+  voice?: any;
 };
 
 const initialState: State = {

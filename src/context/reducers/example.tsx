@@ -1,4 +1,4 @@
-import { ACTION_TEST, SHOW_TOGGLE, POPULATE_VOICELIST } from "../_types";
+import { ACTION_TEST, SHOW_TOGGLE, SET_VOICE } from "../_types";
 import { State, DispatchArgs } from "../providers/initialState";
 
 const reducer = (state: State, action: DispatchArgs) => {
@@ -9,6 +9,9 @@ const reducer = (state: State, action: DispatchArgs) => {
       return newState;
     case SHOW_TOGGLE:
       newState.show = !state.show;
+      return newState;
+    case SET_VOICE:
+      newState.voice = action.payload;
       return newState;
     default:
       return state;

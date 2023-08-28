@@ -1,7 +1,10 @@
 import { DispatchArgs } from "../providers/initialState";
 
-export const dispatchAndLogEvent = (dispatch: React.Dispatch<DispatchArgs>, { type, payload }:DispatchArgs) => {
-  if (process.env.REACT_APP_DISPATCH_LOGGED) console.log("DISPATCH", { type, payload });
+export const dispatchAndLogEvent = (
+  dispatch: React.Dispatch<DispatchArgs>,
+  { type, payload }: DispatchArgs
+) => {
+  console.log("DISPATCH", { type, payload });
   dispatch({ type, payload });
 };
 
