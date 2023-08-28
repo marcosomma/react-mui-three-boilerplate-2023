@@ -1,9 +1,16 @@
-import { useContext, useState, useEffect, ReactElement } from "react";
+import {
+  useContext,
+  useState,
+  useEffect,
+  ReactElement,
+  ChangeEvent,
+} from "react";
 import withStyles from "@mui/styles/withStyles";
 import {
   Select,
-  MenuItem,
+  InputLabel,
   FormControl,
+  NativeSelect,
   SelectChangeEvent,
 } from "@mui/material";
 import { StateContext } from "../context/providers/State";
@@ -31,33 +38,38 @@ const VoiceSelector = ({ classes }: any): ReactElement => {
         })
       );
     }
+    if (actionsCollection.example) {
+      actionsCollection.example.setVoice(voiceList[Number(voice)]);
+    }
   }, [voiceList]);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setVoice(event.target.value as string);
+  const handleChange = (event: any) => {
+    console.log(event.target.value);
+    setVoice(event.target.value);
     // actionsCollection.setVoice()
     if (actionsCollection.example) {
-      console.log(Number(event.target.value))
-      console.log(voiceList[Number(event.target.value)])
       actionsCollection.example.setVoice(voiceList[Number(event.target.value)]);
     }
   };
   return (
-    <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-      <Select
-        labelId="voice-selector-label"
-        id="voice-selector"
-        value={voice}
-        label="Voice"
+    <FormControl variant="filled" sx={{ m: 1, minWidth: 340 }}>
+      <InputLabel variant="standard" htmlFor="uncontrolled-native">
+        Select a voice
+      </InputLabel>
+      <NativeSelect
+        defaultValue={voice}
+        inputProps={{
+          name: "voice",
+          id: "uncontrolled-native",
+        }}
         onChange={handleChange}
       >
         {voiceList.map((vOpt, i) => (
-            <MenuItem key={i} value={`${i}`}>
-              {vOpt.lang} - {vOpt.name}
-            </MenuItem>
-          )
-        )}
-      </Select>
+          <option value={i}>
+            {vOpt.lang} - {vOpt.name}
+          </option>
+        ))}
+      </NativeSelect>
     </FormControl>
   );
 };

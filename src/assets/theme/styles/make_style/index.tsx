@@ -1,11 +1,11 @@
-const SeatMapStyle = (theme: any) => {
-  return ({
+const voiceSelector = (theme: any) => {
+  return {
     color: theme.palette.getContrastText(theme.palette.primary.dark),
     backgroundColor: theme.palette.primary.dark,
-    '&:hover': {
+    "&:hover": {
       color: theme.palette.getContrastText(theme.palette.primary.main),
       backgroundColor: theme.palette.primary.main,
     },
-  });
+  };
 };
-export default SeatMapStyle;
+export default voiceSelector;

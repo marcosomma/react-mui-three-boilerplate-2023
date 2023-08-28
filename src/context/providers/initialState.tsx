@@ -17,6 +17,7 @@ export type State = {
   footer: string;
   show: boolean;
   voice?: any;
+  recordedText?: string;
 };
 
 const initialState: State = {

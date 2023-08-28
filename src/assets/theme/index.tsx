@@ -119,52 +119,7 @@ let theme = createTheme({
       xl: 1920,
     },
   },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: () => ({
-          textTransform: "none",
-          fontWeight: "bold",
-        }),
-        outlined: () => ({
-          "&.Mui-disabled": {
-            background: theme.palette.common.white,
-            color: theme.palette.grey[100],
-            borderColor: theme.palette.grey[100],
-          },
-        }),
-        text: () => ({
-          "&.Mui-focused": {
-            borderRadius: 10,
-          },
-          "&.Mui-disabled": {
-            color: theme.palette.grey[100],
-          },
-        }),
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: () => ({
-          "& :-webkit-autofill": {
-            WebkitBoxShadow: "0 0 0 1000px white inset",
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary,
-          },
-          "&:hover:not(.Mui-error):not(.Mui-focused) .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary,
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary,
-          },
-        }),
-      },
-    },
-    MuiInput: {
-      styleOverrides: {},
-    },
-  },
+  components: {},
 });
 
 theme = responsiveFontSizes(theme);
