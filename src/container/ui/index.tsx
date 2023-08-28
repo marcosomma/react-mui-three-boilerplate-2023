@@ -89,7 +89,7 @@ function Landing({ classes }: any): ReactElement {
         </Paper>
         <Paper
           style={{
-            margin: 10,
+            marginTop: 10,
             background: "lightblue",
             padding: 10,
           }}
