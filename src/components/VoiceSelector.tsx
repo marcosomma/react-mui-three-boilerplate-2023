@@ -65,7 +65,7 @@ const VoiceSelector = ({ classes }: any): ReactElement => {
         onChange={handleChange}
       >
         {voiceList.map((vOpt, i) => (
-          <option value={i}>
+          <option value={i} key={`voice-${i}`}>
             {vOpt.lang} - {vOpt.name}
           </option>
         ))}

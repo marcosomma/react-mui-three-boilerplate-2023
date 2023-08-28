@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import StateContextProvider from "./context/providers/State";
-import UI from "./container/ui";
+import UI from "./container/Landing";
 import customTheme from "./assets/theme";
 import "./App.css";
 

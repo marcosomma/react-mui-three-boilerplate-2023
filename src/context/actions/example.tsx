@@ -1,4 +1,4 @@
-import { ACTION_TEST, SHOW_TOGGLE, SET_VOICE, SET_MESSAGE } from "../_types";
+import { ACTION_TEST, SHOW_TOGGLE, SET_VOICE, SET_MESSAGE, SET_ROLE } from "../_types";
 import { State, DispatchArgs } from "../providers/initialState";
 import { dispatchAndLogEvent } from "./_logger";
 export interface ExampleActions {
@@ -6,6 +6,7 @@ export interface ExampleActions {
   showToggler: GenericFunction;
   setVoice: GenericFunction;
   setMsg: GenericFunction;
+  setRole: GenericFunction;
 }
 type GenericFunction = (params?: any) => void;
 
@@ -38,12 +39,19 @@ const actions = (
       payload: args,
     });
   };
+  const setRole = (args: any) => {
+    dispatchAndLogEvent(dispatch, {
+      type: SET_ROLE,
+      payload: args,
+    });
+  };
 
   return {
     test,
     showToggler,
     setVoice,
     setMsg,
+    setRole
   };
 };
 
